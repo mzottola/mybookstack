@@ -22,6 +22,6 @@ internal class ThumbnailLinkTest {
     fun `should reject creation of thumbnail link with incorrect value`() {
         assertThatThrownBy { ThumbnailLink("not_http_nor_https://") }
             .isInstanceOf(InvalidThumbnailException::class.java)
-            .hasMessage("A thumbnail link must be a HTTP link")
+            .hasMessage("A thumbnail link must be a HTTP or HTTPS link")
     }
 }

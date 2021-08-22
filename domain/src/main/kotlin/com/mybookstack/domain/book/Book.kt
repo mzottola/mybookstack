@@ -1,20 +1,17 @@
 package com.mybookstack.domain.book
 
 import com.mybookstack.annotations.Entity
+import com.mybookstack.domain.spi.RetrieveBooksPreference
 import java.time.LocalDate
 
 @Entity
-class Book private constructor(
+class Book(
     private val isbn: ISBN13,
     private val title: Title,
     private val author: Author,
     private val publishedDate: LocalDate,
     private val thumbnailLink: ThumbnailLink
 ) {
-    companion object {
-        fun createBook(isbn: String, title: String, author: String, publishedDate: LocalDate, thumbnailLink: String) =
-            Book(ISBN13(isbn), Title(title), Author(author), publishedDate, ThumbnailLink(thumbnailLink))
-    }
 
     override fun equals(other: Any?): Boolean {
         if (other == null)
@@ -28,4 +25,11 @@ class Book private constructor(
     override fun hashCode(): Int {
         return isbn.toUniqueNumber()
     }
+
+    fun satisfies(preferences: RetrieveBooksPreference) =
+        matchAuthor(preferences.inAuthor) && matchTitle(preferences.inTitle)
+
+    private fun matchAuthor(inAuthor: String) = this.author.value.contains(inAuthor, ignoreCase = true)
+    private fun matchTitle(inTitle: String) = this.title.value.contains(inTitle, ignoreCase = true)
+
 }

@@ -1,5 +1,6 @@
 package com.mybookstack.domain.book
 
+import com.mybookstack.domain.spi.RetrieveBooksPreference
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
@@ -8,32 +9,49 @@ internal class BookTest {
     @Test
     fun `should be equal when two books have the same ISBN`() {
         // given
-        val book1 = Book.createBook(
-            "1234567891234",
-            "Effective Java",
-            "Joshua Bloch",
+        val book1 = Book(
+            ISBN13("1234567891234"),
+            Title("Effective Java"),
+            Author("Joshua Bloch"),
             LocalDate.parse("2008-05-08"),
-            "https://thumbail.com"
+            ThumbnailLink("https://thumbail.com")
         )
-        val book1Bis = Book.createBook(
-            "1234567891234",
-            "Effective Java",
-            "Joshua Bloch",
+        val book1Bis = Book(
+            ISBN13("1234567891234"),
+            Title("Effective Java"),
+            Author("Joshua Bloch"),
             LocalDate.parse("2008-05-08"),
-            "https://thumbail.com"
+            ThumbnailLink("https://thumbail.com")
         )
-        val fakeBook = Book.createBook(
-            "0000000000000",
-            "Fake book",
-            "Any",
+        val fakeBook = Book(
+            ISBN13("0000000000000"),
+            Title("Fake book"),
+            Author("Any"),
             LocalDate.parse("2000-01-01"),
-            "https://fake.com"
+            ThumbnailLink("https://fake.com")
         )
 
         // then
         assertThat(book1).isEqualTo(book1Bis)
         assertThat(book1Bis).isEqualTo(book1)
         assertThat(fakeBook).isNotEqualTo(book1)
-        assertThat(book1Bis).isNotEqualTo(fakeBook)
+        assertThat(fakeBook).isNotEqualTo(book1Bis)
+    }
+
+    @Test
+    fun `should get a book that satisfies the search preferences`() {
+        // given
+        val book = Book(
+            ISBN13("1234567891234"),
+            Title("Effective Java"),
+            Author("Joshua Bloch"),
+            LocalDate.parse("2008-05-08"),
+            ThumbnailLink("https://thumbail.com")
+        )
+
+        // when
+        assertThat(book.satisfies(RetrieveBooksPreference("bloch", "effective")))
+            // then
+            .isTrue
     }
 }

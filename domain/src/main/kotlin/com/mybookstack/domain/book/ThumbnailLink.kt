@@ -11,8 +11,9 @@ value class ThumbnailLink(private val value: String) {
         }
         // TODO (mzo) write better validation
         if (listOf("http://", "https://").none { value.startsWith(it) }) {
-            throw InvalidThumbnailException("A thumbnail link must be a HTTP link")
+            throw InvalidThumbnailException("A thumbnail link must be a HTTP or HTTPS link")
         }
     }
 }
+
 class InvalidThumbnailException(message: String) : RuntimeException(message)

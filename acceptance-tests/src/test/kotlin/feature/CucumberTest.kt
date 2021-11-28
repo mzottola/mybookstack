@@ -1,4 +1,4 @@
-package com.domain.feature
+package feature
 
 import io.cucumber.junit.platform.engine.Cucumber
 

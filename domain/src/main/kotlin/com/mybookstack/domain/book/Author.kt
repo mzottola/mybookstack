@@ -4,7 +4,7 @@ import com.mybookstack.annotations.ValueObject
 
 @ValueObject
 @JvmInline
-value class Author(private val value: String) {
+value class Author(val value: String) {
     init {
         if (value.isBlank()) {
             throw InvalidAuthorException("An author cannot be empty")

@@ -1,0 +1,64 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://mybookstack/api/v1'
+info:
+  description: >-
+    Manage your book library
+  version: 1.0.0
+  title: My Book Stack
+  license:
+    name: Apache-2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: book
+    description: the books available
+paths:
+  /books:
+    get:
+      tags:
+        - book
+      summary: Find books by author and title
+      description: Multiple books can be returned
+      operationId: findBooks
+      parameters:
+        - name: author
+          in: query
+          description: a part of the author name
+          required: true
+          schema:
+            type: string
+        - name: title
+          in: query
+          description: a part of the title
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookDto'
+        '405':
+          description: Invalid input
+components:
+  schemas:
+    BookDto:
+      title: Book
+      description: A Book from the library
+      type: object
+      properties:
+        isbn:
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+        publishedDate:
+          type: string
+          format: date
+        thumbnailLink:
+          type: string

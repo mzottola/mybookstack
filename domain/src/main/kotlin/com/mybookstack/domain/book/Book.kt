@@ -6,11 +6,11 @@ import java.time.LocalDate
 
 @Entity
 class Book(
-    private val isbn: ISBN13,
-    private val title: Title,
-    private val author: Author,
-    private val publishedDate: LocalDate,
-    private val thumbnailLink: ThumbnailLink
+    val isbn: ISBN13,
+    val title: Title,
+    val author: Author,
+    val publishedDate: LocalDate,
+    val thumbnailLink: ThumbnailLink
 ) {
 
     override fun equals(other: Any?): Boolean {

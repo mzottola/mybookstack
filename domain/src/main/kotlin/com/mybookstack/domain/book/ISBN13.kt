@@ -4,7 +4,7 @@ import com.mybookstack.annotations.ValueObject
 
 @ValueObject
 @JvmInline
-value class ISBN13(private val value: String) {
+value class ISBN13(val value: String) {
     init {
         if (value.isBlank()) {
             throw InvalidISBN13Exception("An ISBN-13 cannot be empty")

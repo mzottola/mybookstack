@@ -13,11 +13,14 @@
         <kotlin.version>1.5.10</kotlin.version>
         <junit.jupiter.version>5.7.2</junit.jupiter.version>
         <assertj.core.version>3.19.0</assertj.core.version>
+        <spring.boot.version>2.6.1</spring.boot.version>
     </properties>
 
     <modules>
         <module>domain</module>
         <module>acceptance-tests</module>
+        <module>rest-adapter</module>
+        <module>my-book-stack-service</module>
     </modules>
 
     <dependencies>
@@ -41,6 +44,16 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.mybookstack</groupId>
+                <artifactId>domain</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mybookstack</groupId>
+                <artifactId>rest-adapter</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-stdlib</artifactId>

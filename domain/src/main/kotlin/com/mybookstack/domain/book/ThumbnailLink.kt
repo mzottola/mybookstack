@@ -4,7 +4,7 @@ import com.mybookstack.annotations.ValueObject
 
 @ValueObject
 @JvmInline
-value class ThumbnailLink(private val value: String) {
+value class ThumbnailLink(val value: String) {
     init {
         if (value.isBlank()) {
             throw InvalidThumbnailException("A thumbnail link cannot be empty")

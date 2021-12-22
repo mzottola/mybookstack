@@ -20,7 +20,6 @@
         <dependency>
             <groupId>com.mybookstack</groupId>
             <artifactId>domain</artifactId>
-            <version>${parent.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
